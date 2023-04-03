@@ -1,0 +1,7 @@
+name: passenger
+recipe: symfony
+config:
+  webroot: public
+  php: 8.1
+  xdebug: true
+  database: mysql
