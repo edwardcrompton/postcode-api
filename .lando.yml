@@ -5,3 +5,5 @@ config:
   php: 8.1
   xdebug: true
   database: mysql
+  config:
+    php: .vscode/php.ini
