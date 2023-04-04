@@ -14,7 +14,7 @@ class Postcode
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 16)]
+    #[ORM\Column(length: 16, unique: true)]
     private ?string $postcode = null;
 
     #[ORM\Column(type: Types::BIGINT)]
