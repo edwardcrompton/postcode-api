@@ -5,8 +5,21 @@ namespace App\Entity;
 use App\Repository\PostcodeRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Metadata\GetCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 
 #[ORM\Entity(repositoryClass: PostcodeRepository::class)]
+#[ApiResource(
+    operations: [
+        new GetCollection(denormalizationContext: ['groups' => 'postcode:list'])
+    ],
+    order: ['postcode' => 'ASC'],
+    routePrefix: 'v1',
+)]
+#[ApiFilter(SearchFilter::class, properties: ['postcode' => 'ipartial'])]
 class Postcode
 {
     #[ORM\Id]
@@ -15,12 +28,15 @@ class Postcode
     private ?int $id = null;
 
     #[ORM\Column(length: 16, unique: true)]
+    #[Groups(['postcode:list'])]
     private ?string $postcode = null;
 
     #[ORM\Column(type: Types::BIGINT)]
+    #[Groups(['postcode:list'])]
     private ?string $eastings = null;
 
     #[ORM\Column(type: Types::BIGINT)]
+    #[Groups(['postcode:list'])]
     private ?string $northings = null;
 
     public function getId(): ?int
