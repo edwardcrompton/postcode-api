@@ -10,6 +10,7 @@ use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\GetCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use App\Filter\LocationFilter;
 
 #[ORM\Entity(repositoryClass: PostcodeRepository::class)]
 #[ApiResource(
@@ -20,6 +21,7 @@ use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
     routePrefix: 'v1',
 )]
 #[ApiFilter(SearchFilter::class, properties: ['postcode' => 'ipartial'])]
+#[ApiFilter(LocationFilter::class, properties: ['eastings', 'northings'])]
 class Postcode
 {
     #[ORM\Id]
