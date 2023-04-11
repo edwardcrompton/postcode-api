@@ -20,6 +20,12 @@ Then, from the root of the codebase, start Lando:
 > lando start
 ```
 
+Install composer dependencies:
+
+```
+> lando composer install
+```
+
 ## Importing postcodes
 
 The following command will download postcode data and import it into the
